@@ -363,3 +363,210 @@ hue = df["Cluster"])
 plt.title("KMeans")
 plt.xlabel(df.columns[0])
 plt.ylabel(df.columns[1])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Exp 4 : Implementation of Naive Bayes and Support Vector Machine (SVM)
+Algorithms using Python
+Naive Bayes:
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score, classification_report
+# 1. Load CSV file (use your correct path)
+data = pd.read_csv("Naive_based_Classification_problem_csv.csv")
+# 2. Separate features and target
+X = data.iloc[:, :-1] # features
+y = data.iloc[:, -1] # class label
+# 3. Convert categorical features to numeric using One-Hot Encoding
+X = pd.get_dummies(X)
+# 4. Ensure all feature values are numeric
+X = X.apply(pd.to_numeric)
+# 5. Train-test split
+X_train, X_test, y_train, y_test = train_test_split(
+ X, y, test_size=0.2, random_state=42
+)
+# 6. Create and train Naive Bayes model
+nb = GaussianNB()
+nb.fit(X_train, y_train)
+# 7. Predict
+y_pred = nb.predict(X_test)
+# 8. Evaluate
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print(classification_report(y_test, y_pred))
+
+
+
+
+SVM:
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.preprocessing import StandardScaler
+# Load dataset
+data = pd.read_csv(r'Downloads/Naive_based_Classification_problem_csv.csv')
+# Features and target
+X = data.iloc[:, :-1]
+y = data.iloc[:, -1]
+# One-hot encoding
+X = pd.get_dummies(X)
+# Convert to numeric
+X = X.apply(pd.to_numeric)
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+ X, y, test_size=0.2, random_state=42
+)
+# Feature scaling
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+# SVM model
+svm = SVC(kernel='linear')
+# Train
+svm.fit(X_train, y_train)
+# Predict
+y_pred = svm.predict(X_test)
+# Evaluate
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred))
+print("\nClassification Report:\n",
+ classification_report(y_test, y_pred, zero_division=0))
+Exp 5: Implement Linear Regression/Logistic Regression algorithms using Python
+on real-world dataset
+
+
+
+Linear Regression:
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import fetch_california_housing
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+# Load dataset
+data = fetch_california_housing()
+X = data.data[:, 0].reshape(-1, 1)
+y = data.target
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+ X, y, test_size=0.2
+)
+# Train model
+model = LinearRegression()
+model.fit(X_train, y_train)
+# Predictions
+y_pred = model.predict(X_test)
+# Evaluate
+print("Mean Squared Error:", mean_squared_error(y_test, y_pred))
+# Plot regression line
+plt.scatter(X_test, y_test, label="Actual Data")
+plt.plot(X_test, y_pred, label="Regression Line")
+plt.title("Linear Regression: Actual vs Predicted")
+plt.xlabel("Feature")
+plt.ylabel("House Price")
+plt.legend()
+plt.show()
+
+
+
+Logistic Regression:
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_breast_cancer
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+# Load dataset (use only 2 features for plotting)
+data = load_breast_cancer()
+X = data.data[:, :2]
+y = data.target
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# Train model
+model = LogisticRegression(max_iter=5000)
+model.fit(X_train, y_train)
+# Plot decision boundary
+x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.01),
+ np.arange(y_min, y_max, 0.01))
+Z = model.predict(np.c_[xx.ravel(), yy.ravel()])
+Z = Z.reshape(xx.shape)
+# Make predictions on the test set for evaluation
+y_pred = model.predict(X_test)
+# Evaluation
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred))
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
+plt.contourf(xx, yy, Z, alpha=0.3)
+plt.title("Logistic Regression Decision Boundary")
+plt.xlabel("Feature 1")
+plt.ylabel("Feature 2")
+plt.show()
+
+
+
+Exp 6: Implementation of K-Means Clustering Algorithm using Python.
+from sklearn.cluster import KMeans
+import numpy as np
+import matplotlib.pyplot as plt
+X = np.array([
+ [1,2],[1.5,1.8],[5,8],
+ [8,8],[1,0.6],[9,11],
+ [8,2],[10,2],[9,3]
+])
+kmeans = KMeans(n_clusters=3)
+kmeans.fit(X)
+centroids = kmeans.cluster_centers_
+labels = kmeans.labels_
+plt.scatter(X[:,0], X[:,1], c=labels, cmap='rainbow')
+plt.scatter(centroids[:,0], centroids[:,1], s=200, c='black', marker='X')
+plt.show()
