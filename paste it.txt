@@ -533,3 +533,42 @@ sns.heatmap(
  
 plt.title("Logistic Regression")
 plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Exp 7: Implementation of Association Rule Mining (Apriori Algorithm) using WEKA Step 1: Create Dataset File 
+1. Open Notepad. 2. Type the dataset:
+ @relation market
+ @attribute bread {yes,no} 
+@attribute butter {yes,no} @attribute jam {yes,no} 
+@attribute milk {yes,no} @attribute juice {yes,no} 
+@attribute curd {yes,no}
+
+ @data yes,yes,yes,yes,no,no yes,yes,no,yes,no,no yes,no,no,no,yes,yes yes,no,no,yes,yes,no no,yes,no,yes,yes,no 
+3. Save the file as: market.arff 
+Step 2: Open WEKA 1. Open the WEKA Tool. 2. Click Explorer. 
+Step 3: Load Dataset 1. Go to the Preprocess tab. 2. Click Open File. 3. Select: market.arff Step 4: Select Apriori Algorithm 1. Go to the Associate tab. 2. Click Choose. 3. Select: Associations → Apriori 
+Step 5: Run the Program 1. Set support and confidence values if needed. 2. Click Start. 
+Step 6: Observe Output ● Frequent itemsets generated ● Association rules displayed ● Support, confidence, and lift values shown 
